@@ -1,0 +1,74 @@
+{
+    "name": "ifinca-network",
+    "version": "1.0.0",
+    "client": {
+        "organization": "ifinca",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                },
+                "orderer": "300"
+            }
+        }
+    },
+    "channels": {
+        "mychannel": {
+            "orderers": [
+                "orderer0.ifincaorderer.co"
+            ],
+            "peers": {
+                "peer0.ifinca.co": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "ledgerQuery": true,
+                    "eventSource": true
+                }
+            }
+        }
+    },
+    "organizations": {
+        "ifinca": {
+            "mspid": "ifincaMSP",
+            "peers": [
+                "peer0.ifinca.co"
+            ],
+            "certificateAuthorities": [
+                "ca.ifinca.co"
+            ]
+        }
+    },
+    "orderers": {
+        "orderer0.ifincaorderer.co": {
+            "url": "grpc://localhost:7050",
+            "grpcOptions": {
+                "ssl-target-name-override": "orderer0.ifincaorderer.co",
+                "grpc.keepalive_timeout_ms": 15
+            }
+        }
+    },
+    "peers": {
+        "peer0.ifinca.co": {
+            "url": "grpc://localhost:7051",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.ifinca.co",
+                "grpc.keepalive_timeout_ms": 20000
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.ifinca.co": {
+            "url": "http://localhost:7054",
+            "caName": "ca.ifinca.co",
+            "httpOptions": {
+                "verify": false
+            },
+            "registrar": [
+                {
+                    "enrollId": "admin",
+                    "enrollSecret": "adminpw"
+                }
+            ]
+        }
+    }
+}
